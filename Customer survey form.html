@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        
+        .container {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .radio-group {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        #submit, #reset {
+            padding: 10px 20px;
+            background-color: #0074D9;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer Survey Form</h1>
+    <div class="container">
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <select id="country" required>
+                    <option value="" disabled selected>Select your country</option>
+                    <option value="USA">USA</option>
+                    <option value="Canada">Canada</option>
+                    <!-- Add more country options here -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <input type="radio" name="gender" id="male" value="Male" required>
+                    <label for="male">Male</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" name="gender" id="female" value="Female" required>
+                    <label for="female">Female</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="profession">Profession:</label>
+                <input type="text" id="profession" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" required>
+            </div>
+
+            <div class="form-group">
+                <button type="button" id="submit">Submit</button>
+                <button type="button" id="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            let form = document.getElementById('surveyForm');
+            if (form.checkValidity()) {
+                let firstName = document.getElementById('firstName').value;
+                let lastName = document.getElementById('lastName').value;
+                let dob = document.getElementById('dob').value;
+                let country = document.getElementById('country').value;
+                let gender = document.querySelector('input[name="gender"]:checked').value;
+                let profession = document.getElementById('profession').value;
+                let email = document.getElementById('email').value;
+                let mobile = document.getElementById('mobile').value;
+                let popupContent = `
+                    <h2>Survey Form Data</h2>
+                    <p><strong>First Name:</strong> ${firstName}</p>
+                    <p><strong>Last Name:</strong> ${lastName}</p>
+                    <p><strong>Date of Birth:</strong> ${dob}</p>
+                    <p><strong>Country:</strong> ${country}</p>
+                    <p><strong>Gender:</strong> ${gender}</p>
+                    <p><strong>Profession:</strong> ${profession}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Mobile Number:</strong> ${mobile}</p>
+                    <p>Thank you for submitting the form!</p>
+                `;
+
+                let popup = window.open('', 'Survey Form Data', 'width=400,height=400');
+                popup.document.write(popupContent);
+                popup.focus();
+                form.reset();
+            } else {
+                alert('Please fill out all required fields.');
+            }
+        });
+
+        document.getElementById('reset').addEventListener('click', function() {
+            let form = document.getElementById('surveyForm');
+            form.reset();
+        });
+    </script>
+</body>
+</html>
